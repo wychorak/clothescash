@@ -3,7 +3,7 @@ import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import { Product } from '../types';
 import { motion } from 'motion/react';
-import { TrendingUp, DollarSign, Package, ShoppingBag, Shirt, CheckCircle } from 'lucide-react';
+import { TrendingUp, DollarSign, Package, ShoppingBag, Shirt, CircleCheck as CheckCircle } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export const Dashboard: React.FC = () => {
@@ -58,13 +58,32 @@ export const Dashboard: React.FC = () => {
   }, [] as { name: string, count: number }[]);
 
   const StatCard = ({ title, value, icon: Icon, color }: any) => (
-    <motion.div 
-      whileHover={{ scale: 1.02 }}
-      className="glass-panel p-6 rounded-[2rem] flex items-center gap-5"
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ scale: 1.05, y: -5 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="glass-panel p-6 rounded-[2rem] flex items-center gap-5 relative overflow-hidden"
     >
-      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg ${color}`}>
+      <motion.div
+        className="absolute -top-2 -right-2 w-20 h-20 bg-pink-200/20 rounded-full blur-xl"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3]
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div
+        whileHover={{ rotate: [0, -10, 10, 0] }}
+        transition={{ duration: 0.5 }}
+        className={`w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg ${color}`}
+      >
         <Icon size={28} />
-      </div>
+      </motion.div>
       <div>
         <p className="text-sm font-medium text-gray-500 mb-1">{title}</p>
         <h3 className="text-2xl font-bold text-gray-800 font-display">{value}</h3>
