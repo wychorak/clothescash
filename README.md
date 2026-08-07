@@ -1,20 +1,29 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ClothesCash
 
-# Run and deploy your AI Studio app
+> Status: archived prototype, superseded by [resale-monitor](https://github.com/wychorak/resale-monitor).
 
-This contains everything you need to run your app locally.
+ClothesCash is a React dashboard for tracking clothing inventory, purchase costs, sales and resale profit. It was an early product experiment that informed the newer resale-monitor project.
 
-View your app in AI Studio: https://ai.studio/apps/8bd9ee99-0481-4d95-a0e2-281fc1a4a69e
+## What it demonstrates
 
-## Run Locally
+- CRUD flows for clothing inventory stored in Firestore
+- sales, cost and profit summaries
+- filtering and product-library management
+- responsive dashboard UI built with React, TypeScript and Tailwind CSS
 
-**Prerequisites:**  Node.js
+## Stack
 
+React 19, TypeScript, Vite, Tailwind CSS, Firebase/Firestore, Recharts and Motion.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Run locally
+
+```bash
+npm ci
+npm run dev
+```
+
+The Firebase client configuration is included for the original prototype. The checked-in Firestore rules allow public access and must **not** be deployed with real or sensitive data. Use a separate Firebase project and restrictive rules for any further development.
+
+## Verification
+
+`npm run lint` and `npm run build` pass on the archived source. The generated bundle is large and would benefit from code splitting before production use.
